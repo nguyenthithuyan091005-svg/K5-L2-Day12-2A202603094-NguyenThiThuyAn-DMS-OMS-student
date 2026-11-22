@@ -17,7 +17,7 @@ Làm cá nhân, không mở slide, khoảng 10 phút. Ghi đáp án ngay dưới
 
 **Câu 2 · Số, 2 chữ số thập phân.** Camera DMS chạy 30 khung hình/giây. Model ước lượng yaw của đầu tài xế lớn hơn 30° liên tục từ khung hình số 240 đến khung hình số 314, **tính cả khung 240 và khung 314**. Tài xế không nhìn đường trong bao nhiêu giây?
 
-Đáp án: 2,5s
+Đáp án: 2,50s
 
 **Câu 3 · Chọn tất cả đáp án đúng.** Những câu nào đúng về dữ liệu cabin so với dữ liệu camera ngoài xe?
 
