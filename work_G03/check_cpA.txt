@@ -1,0 +1,11 @@
+File: work_G03/export_first_2152.zip · chỉ kiểm ảnh: S01, S02
+Ảnh: 4 · đã có frame_meta: 4 · số đối tượng: child_seat=4, face=2, infant_seat=2, object=1, person=2
+  [WARN] S01_ir.png: child_seat: seat=driver trên ảnh SVIRO (camera chỉ nhìn hàng ghế sau)
+  [ERROR] S01_rgb.png: frame_meta: modality='ir' nhưng ảnh này phải là 'rgb'
+  [ERROR] S02_rgb.png: frame_meta: modality='ir' nhưng ảnh này phải là 'rgb'
+Kết quả: 2 lỗi, 1 cảnh báo. Cảnh báo cần bạn tự xét, không tự động là sai.
+
+Ghi chú: tôi làm lại bộ G03 sau khi đổi mã bộ ảnh, nên không có lượt export riêng tại Checkpoint A. File này chạy --only S01,S02 trên bản export G03 đầu tiên (21:52, 21/11), trước mọi lần sửa.
+- S01_rgb, S02_rgb: modality để mặc định 'ir'. Đã sửa thành 'rgb' (bản 22:06).
+- S01_ir: child_seat seat=driver là giá trị mặc định chưa đổi. Đã sửa thành rear_right, occupied=yes.
+Lỗi này không còn ở lần kiểm cuối (check_final.txt, check_final_v2.txt: 0 lỗi).

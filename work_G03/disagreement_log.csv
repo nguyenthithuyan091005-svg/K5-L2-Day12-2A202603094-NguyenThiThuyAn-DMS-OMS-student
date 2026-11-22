@@ -1,0 +1,55 @@
+﻿image,label,field,issue,mine,peer,verdict,guideline_rule,action
+D01.png,face13,right_eye_outer.occluded,khác cờ,1,0,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D01.png,face13,right_eye_inner.occluded,khác cờ,0,1,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D01.png,face13,mouth_right.occluded,khác cờ,0,1,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D02.png,hand,box,chỉ có ở mine (hoặc IoU thấp),IoU=0.49,,ambiguous,4.4-5,"giữ; cả hai đều ôm tay phải trên mép laptop, chỉ khác độ rộng (hộp sát mép)"
+D02.png,face,box,chỉ có ở mine (hoặc IoU thấp),IoU=0.00,,peer,4.5,đã sửa trong v2: xóa box face D02 (không thấy cả mắt lẫn mũi thì không vẽ face)
+D02.png,hand,box,chỉ có ở peer (hoặc IoU thấp),,,ambiguous,4.4-5,"giữ; cả hai đều ôm tay phải trên mép laptop, chỉ khác độ rộng (hộp sát mép)"
+D03.png,face,eye_right,khác giá trị (IoU=0.59),open,unknown,mine,4.4-2 / 4.5,giữ open (mắt phải có y nhỏ hơn; 4.5 open khi thấy khe mắt)
+D03.png,face,gaze_zone,khác giá trị (IoU=0.59),center,road,ambiguous,4.5,"giữ; hỏi coach (gaze_zone, other khi không chắc)"
+D03.png,face13,right_eye_outer.occluded,khác cờ,1,0,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D03.png,face13,right_eye_outer.outside,khác cờ,0,1,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D03.png,face13,mouth_right.occluded,khác cờ,1,0,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D03.png,face13,mouth_right.outside,khác cờ,0,1,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D04.png,hand,on_wheel,khác giá trị (IoU=0.90),no,unknown,mine,4.7,"giữ no (on_wheel: tay trái đang cầm chai nước, không chạm vô lăng)"
+D04.png,face,gaze_zone,khác giá trị (IoU=0.70),mirror_r,other,peer,4.5,"đã sửa trong v2: đổi mirror_r thành other (không chắc hướng nhìn) (gaze_zone, other khi không chắc)"
+D05.png,face,eye_left,khác giá trị (IoU=0.76),unknown,open,ambiguous,4.4-1 / 4.5,"giữ unknown (mặt sát mép, mờ) (không phân biệt được thì unknown)"
+D05.png,face,eye_right,khác giá trị (IoU=0.76),unknown,open,ambiguous,4.4-1 / 4.5,giữ unknown (không phân biệt được thì unknown)
+D05.png,person,seatbelt,khác giá trị (IoU=0.97),unknown,worn_correct,mine,4.7,giữ unknown (đang thắt dở thì unknown)
+D05.png,face13,left_eye_outer.outside,khác cờ,1,0,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D05.png,face13,left_eye_inner.outside,khác cờ,1,0,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D05.png,face13,left_eye_upper.outside,khác cờ,1,0,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D05.png,face13,left_eye_lower.outside,khác cờ,1,0,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D05.png,face13,right_eye_outer.outside,khác cờ,1,0,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D05.png,face13,right_eye_inner.outside,khác cờ,1,0,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D05.png,face13,right_eye_upper.outside,khác cờ,1,0,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D05.png,face13,right_eye_lower.outside,khác cờ,1,0,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D06.png,face,eye_right,khác giá trị (IoU=0.96),unknown,open,mine,4.4-1 / 4.5,giữ unknown (bị tay che thì unknown)
+D06.png,face13,left_eye_outer.occluded,khác cờ,0,1,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D06.png,face13,left_eye_inner.occluded,khác cờ,1,0,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D06.png,face13,mouth_right.occluded,khác cờ,1,0,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+D06.png,face13,mouth_right.outside,khác cờ,0,1,ambiguous,4.6,"giữ; xem lại điểm trên CVAT (occluded nếu đoán chắc vị trí, outside nếu không)"
+S01_ir.png,infant_seat,facing,khác giá trị (IoU=0.98),rear,front,ambiguous,4.4-1,giữ; hỏi coach (không đoán; không thấy em bé nên khó biết hướng)
+S01_ir.png,face,box,chỉ có ở peer (hoặc IoU thấp),,,mine,4.2 / 4.1,giữ (không vẽ face cho trẻ) (face đi kèm người lớn (person); trẻ trong child_seat không gán person (quyết định coach); 4.1 OMS chỉ box)
+S01_rgb.png,infant_seat,facing,khác giá trị (IoU=0.99),rear,front,ambiguous,4.4-1,giữ; hỏi coach (không đoán)
+S01_rgb.png,object,box,chỉ có ở peer (hoặc IoU thấp),,,peer,4.2 / 4.8,đã sửa trong v2: thêm object other rear_middle (mỗi ghế có vật thì một box; gối ở rear_middle)
+S02_ir.png,face,box,chỉ có ở mine (hoặc IoU thấp),IoU=0.00,,ambiguous,4.5 / 4.2,"giữ; người quay ra cửa sổ, chỉ thấy má và nghiêng mặt (không thấy cả mắt lẫn mũi thì không vẽ face; 4.2 người lớn kèm face)"
+S02_ir.png,child_seat,occupied,khác giá trị (IoU=0.98),no,unknown,mine,4.8,giữ no (occupied=no khi thấy ghế trống)
+S02_rgb.png,face,box,chỉ có ở mine (hoặc IoU thấp),IoU=0.00,,ambiguous,4.5 / 4.2,giữ; như S02_ir
+S03_ir.png,infant_seat,facing,khác giá trị (IoU=0.99),front,rear,mine,4.1,giữ front (facing; em bé quay mặt về camera (phía trước xe) nên front)
+S03_rgb.png,infant_seat,facing,khác giá trị (IoU=0.97),front,rear,mine,4.1,giữ front (facing)
+S05_ir.png,child_seat,occupied,khác giá trị (IoU=0.99),no,yes,mine,4.8,giữ no (occupied=no khi thấy ghế trống (ghế nâng rear_left trống))
+S05_ir.png,infant_seat,box,chỉ có ở mine (hoặc IoU thấp),IoU=0.00,,mine,4.1,giữ infant_seat rear (infant_seat là nôi xách; ghế rear_right là nôi có em bé)
+S05_ir.png,child_seat,box,chỉ có ở peer (hoặc IoU thấp),,,mine,4.1,giữ
+S05_rgb.png,infant_seat,box,chỉ có ở mine (hoặc IoU thấp),IoU=0.00,,mine,4.1,giữ
+S05_rgb.png,object,type,khác giá trị (IoU=0.95),bag,other,mine,4.8,giữ bag (type theo hình dạng: ba lô có quai là bag)
+S05_rgb.png,child_seat,box,chỉ có ở peer (hoặc IoU thấp),,,mine,4.1,giữ
+S06_ir.png,infant_seat,box,chỉ có ở mine (hoặc IoU thấp),IoU=0.00,,mine,4.1,giữ (nôi xách có em bé)
+S06_ir.png,child_seat,box,chỉ có ở peer (hoặc IoU thấp),,,mine,4.1,giữ
+S06_rgb.png,infant_seat,box,chỉ có ở mine (hoặc IoU thấp),IoU=0.00,,mine,4.1,giữ
+S06_rgb.png,child_seat,box,chỉ có ở peer (hoặc IoU thấp),,,mine,4.1,giữ
+S08_ir.png,object,box,chỉ có ở mine (hoặc IoU thấp),IoU=0.00,,mine,4.1 / 4.8,"giữ (thùng giấy là object box, không phải child_seat)"
+S08_ir.png,child_seat,box,chỉ có ở peer (hoặc IoU thấp),,,mine,4.1,giữ
+S08_rgb.png,frame_meta,modality,khác giá trị,rgb,ir,mine,4.3,giữ (_rgb thì modality=rgb)
+S08_rgb.png,person,seatbelt,khác giá trị (IoU=0.99),not_worn,unknown,mine,§3 / 4.7,giữ not_worn (SVIRO not_worn khi thấy rõ không có dây)
+S08_rgb.png,object,type,khác giá trị (IoU=0.97),box,other,mine,4.8,giữ box (thùng giấy là box)

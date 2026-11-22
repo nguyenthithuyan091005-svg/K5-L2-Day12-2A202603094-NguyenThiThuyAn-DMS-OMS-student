@@ -1,0 +1,5 @@
+File: work_G03/export_first_2152.zip · chỉ kiểm ảnh: D01, D02
+Ảnh: 2 · đã có frame_meta: 2 · số đối tượng: face=2, face13=1, hand=4, person=2
+Kết quả: 0 lỗi, 0 cảnh báo. Cảnh báo cần bạn tự xét, không tự động là sai.
+
+Ghi chú: không có lượt export riêng tại Checkpoint B. File này chạy --only D01,D02 trên bản export G03 đầu tiên (21:52, 21/11). Script không báo lỗi. Khi tự soát, tôi sửa thêm D02 seatbelt từ unknown thành worn_correct, vì dải dây thấy rõ qua ngực (GUIDE 4.7).

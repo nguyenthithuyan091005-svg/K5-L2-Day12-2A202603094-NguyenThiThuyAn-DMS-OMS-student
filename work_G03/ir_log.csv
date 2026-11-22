@@ -1,0 +1,9 @@
+frame_id,source,phenomenon,affected_field,effect_on_label
+S06_ir,IR_sim,"Ảnh RGB là cảnh đêm rất tối, nôi ở rear_left gần như chìm trong bóng; ảnh IR-sim sáng đều, thấy rõ dáng nôi và em bé",infant_seat (box + facing),"Gán infant_seat rear_left, facing = rear trên cả hai ảnh; box RGB vẽ theo phần nhìn thấy sau khi tăng brightness hiển thị, không suy từ ảnh IR"
+S01_ir,IR_sim,"RGB tối (đêm), cái gối ở rear_middle khó thấy; IR-sim hiện rõ hình gối",object (box),"Gán object type = other ở rear_middle trên cả hai ảnh; bản v1 sót box này ở S01_rgb, đã bổ sung trong v2"
+S05_ir,IR_sim,"Mất màu: ba lô đỏ trên RGB thành xám, hoa văn ghế trẻ em chỉ còn độ sáng",object (type),"Nhận vật bằng hình dạng (quai đeo, khóa kéo), vẫn ghi type = bag; không dựa vào màu (GUIDE 4.4-4)"
+S01_ir,IR_sim,"IR-sim không có đốm phản xạ hay mắt sáng như NIR thật; mặt trẻ thấy rõ nhưng đây là đèn mô phỏng",face (OMS),"Không ghi hiện tượng IR thật từ ảnh S##; trẻ trong ghế không gán person/face, chỉ child_seat occupied = yes"
+D02,real_IR,"Áo sáng phản xạ mạnh đèn NIR, dải dây an toàn tối nổi rõ chéo qua ngực",seatbelt,"Ghi worn_correct (thấy rõ dây từ vai xuống hông); bản đầu ghi unknown là sai"
+D05,real_IR,"Ánh sáng NIR giảm dần theo khoảng cách: mặt tài xế sát mép ảnh, tối và mờ, không phân biệt được khe mắt",eye_left / eye_right,"Ghi unknown cho cả hai mắt, không đoán open"
+D04,real_IR,"Chai nhựa trong suốt phản xạ đèn LED thành nhiều đốm sáng chói",phone / hand,"Không vẽ phone cho chai (DMS không vẽ object); tay trái cầm chai ghi on_wheel = no"
+D03,real_IR,"Gọng kính thấy rõ, tròng kính trong không chói; một phần vùng mắt bị bàn tay cầm điện thoại che",glasses / face13,"glasses = clear; điểm mắt và khóe miệng bị tay che đánh cờ occluded/outside thay vì đặt điểm cho đủ"

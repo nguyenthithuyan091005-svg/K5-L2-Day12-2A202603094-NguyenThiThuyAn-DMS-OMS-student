@@ -144,6 +144,24 @@ def check_image(img, manifest):
     if is_sviro and metas and metas[0]["attrs"].get("light") not in (None, "unknown"):
         issues.append(("WARN", n, "ảnh SVIRO là ảnh dựng: light nên là 'unknown'"))
 
+    # Drive&Act driver frames (D##.png): real NIR, rotated ~90 deg (GUIDE §3)
+    stem = os.path.splitext(n)[0].lower()
+    is_driver = re.match(r"d\d+$", stem) is not None
+    # modality must match the file: *_rgb -> rgb; *_ir and D## -> ir (GUIDE 4.3)
+    expected = "rgb" if stem.endswith("_rgb") else "ir" if (stem.endswith("_ir") or is_driver) else None
+    if expected and metas:
+        got = metas[0]["attrs"].get("modality")
+        if got and got != expected:
+            issues.append(("ERROR", n, f"frame_meta: modality='{got}' nhưng ảnh này phải là '{expected}'"))
+    # GUIDE 4.3: "Chỉ gán những label bảng 4.1 ghi cho phần đó"
+    dms_only = {"hand", "phone", "face13"}
+    oms_only = {"child_seat", "infant_seat", "object"}
+    for lab in sorted({b["label"] for b in img["boxes"]} | {s["label"] for s in img["skeletons"]}):
+        if is_sviro and lab in dms_only:
+            issues.append(("WARN", n, f"{lab} chỉ dùng cho ảnh DMS (D##), không gán trên ảnh SVIRO"))
+        if is_driver and lab in oms_only:
+            issues.append(("WARN", n, f"{lab} chỉ dùng cho ảnh OMS (S##), không gán trên ảnh DMS (D##)"))
+
     seats_used = {}
     faces = []
     for b in img["boxes"]:
@@ -162,6 +180,17 @@ def check_image(img, manifest):
             if is_sviro and seat in ("driver", "front_passenger"):
                 issues.append(("WARN", n, f"{lab}: seat={seat} trên ảnh SVIRO (camera chỉ nhìn hàng ghế sau)"))
             seats_used.setdefault(seat, []).append(lab)
+        # Coach decision 21/11 (the image sets do contain children, unlike GUIDE §3): child in the seat ->
+        # occupied=yes and NO person box for the child. So "yes" is valid here, no issue raised.
+        if lab == "person" and is_driver and b["attrs"].get("seat") not in (None, "", "driver"):
+            issues.append(("WARN", n, f"person: seat={b['attrs'].get('seat')} trên ảnh DMS (D##): "
+                                      "tài xế phải là seat=driver"))
+        if lab == "face" and is_sviro:
+            extra = {k: v for k, v in b["attrs"].items()
+                     if v not in ("unknown", "other") and k in ("eye_left", "eye_right", "glasses", "gaze_zone")}
+            if extra:
+                issues.append(("WARN", n, f"face trên ảnh OMS chỉ cần box (GUIDE 4.1); thuộc tính {extra} "
+                                          "nên để unknown/other"))
         if lab == "person" and is_sviro and b["attrs"].get("seatbelt") in ("worn_correct", "worn_incorrect"):
             issues.append(("WARN", n, "SVIRO không gắn dây an toàn (trang data SVIRO): kiểm lại seatbelt"))
         if lab == "face":
@@ -172,6 +201,16 @@ def check_image(img, manifest):
             issues.append(("WARN", n, f"ghế {seat} có nhiều box cùng loại: {labs}"))
         if "child_seat" in main and "infant_seat" in main:
             issues.append(("WARN", n, f"ghế {seat} có cả child_seat và infant_seat"))
+        if is_sviro and "person" in main and ("child_seat" in main or "infant_seat" in main):
+            issues.append(("WARN", n, f"ghế {seat} có cả person và {'child_seat' if 'child_seat' in main else 'infant_seat'}: "
+                                      "theo quyết định của coach, trẻ em ngồi trong ghế KHÔNG gán person "
+                                      "(child_seat ghi occupied=yes). Nếu đây là người lớn thì kiểm lại seat"))
+    # GUIDE 4.2: OMS adult = person + face box (no face visible -> no box, write the reason in notes)
+    if is_sviro:
+        n_person = sum(b["label"] == "person" for b in img["boxes"])
+        if n_person > len(faces):
+            issues.append(("WARN", n, f"{n_person} person nhưng chỉ {len(faces)} face: người lớn cần box face; "
+                                      "nếu không thấy mặt thì ghi lý do vào ghi chú (GUIDE 4.2, 4.5)"))
 
     # face13 skeletons
     for s in img["skeletons"]:
@@ -189,16 +228,21 @@ def check_image(img, manifest):
         vis = {p["label"]: p["xy"] for p in s["points"] if p["outside"] == "0" and p["xy"]}
         if len(vis) == 0:
             issues.append(("WARN", n, "face13 không có điểm nào hiện: nếu không thấy mặt thì đừng vẽ face13"))
-        # left/right by the person: in a frontal face the person's left eye is on image right.
+        # left/right by the person. Frontal face: the person's left eye is on image right (larger x).
+        # D## frames are rotated ~90 deg, eye axis runs along y: the left eye has the LARGER y (GUIDE 4.4-2, 4.6).
         le, re_ = vis.get("left_eye_outer"), vis.get("right_eye_outer")
-        if le and re_ and le[0] < re_[0]:
+        if le and re_ and is_driver and le[1] < re_[1]:
+            issues.append(("WARN", n, "ảnh D## xoay 90°: left_eye_outer có y nhỏ hơn right_eye_outer, "
+                                      "mắt trái phải có y lớn hơn. Kiểm lại trái/phải theo người"))
+        elif le and re_ and not is_driver and le[0] < re_[0]:
             issues.append(("WARN", n, "left_eye_outer nằm bên trái ảnh so với right_eye_outer: "
                                       "kiểm lại quy ước trái/phải theo người (đúng nếu mặt quay hẳn sang bên)"))
         host = [f for f in faces if vis and sum(inside(xy, f["xyxy"]) for xy in vis.values()) >= len(vis) / 2]
         if not host:
             issues.append(("WARN", n, "face13 không nằm trong box face nào"))
         for f in host:
-            w = f["xyxy"][2] - f["xyxy"][0]
+            # face width = ear to ear; on rotated D## frames that runs along y
+            w = (f["xyxy"][3] - f["xyxy"][1]) if is_driver else (f["xyxy"][2] - f["xyxy"][0])
             if w < MIN_FACE13_WIDTH_PX:
                 issues.append(("ERROR", n, f"face13 trên mặt rộng {w:.0f} px (< {MIN_FACE13_WIDTH_PX} px không gán face13)"))
         if len(host) == 1:
