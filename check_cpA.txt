@@ -1,4 +1,4 @@
-File: work_G03/export_first_2152.zip · chỉ kiểm ảnh: S01, S02
+File: export_first_2152.zip · chỉ kiểm ảnh: S01, S02
 Ảnh: 4 · đã có frame_meta: 4 · số đối tượng: child_seat=4, face=2, infant_seat=2, object=1, person=2
   [WARN] S01_ir.png: child_seat: seat=driver trên ảnh SVIRO (camera chỉ nhìn hàng ghế sau)
   [ERROR] S01_rgb.png: frame_meta: modality='ir' nhưng ảnh này phải là 'rgb'
